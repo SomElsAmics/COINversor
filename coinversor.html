@@ -1,0 +1,169 @@
+<!-- Hello Amics, here we go -->
+
+<div class="separator" style="clear: both; text-align: center;"><br/></div><br/>
+<!-- The comments always in the NEXT line of the code  -->
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- We gonna use jquery -->
+</head>
+<body>
+ 
+<script>
+    
+function loadJSON(){$.getJSON("https://api.binance.com/api/v3/ticker/price?symbol=SOLEUR", function(result){getJSON(result);});};
+  // We ask Binance for the price of Solana and get the result in a javascript array
+  
+function getJSON(result){let num = parseFloat(((JSON.stringify(result.price, undefined, 2)).substr(1)));let v5 = 5.05*(1 / num);let v10 = 10.1*(1 / num);populate(num,v5,v10);};  
+  //We turn the array into a string and extract the value in 2 ways, the equivalence to 5.05 eur and to 10.1 eur that includes the 1% slippage
+
+function populate(num,v5,v10){document.getElementById("sol").innerHTML = num+" Euros";
+    				document.getElementById("valor5").innerHTML = v5.toFixed(8)+ " SOL";
+    				document.getElementById("valor10").innerHTML = v10.toFixed(8)+ " SOL";
+			      	button_check(num);
+			      	setInterval(function(){window.location.reload(1);}, 60000);
+			     };
+  //Doing float math and showing the values to the user, additionally enable the copy buttons and start the count to reload the page after 1 minute
+
+function copy5(){
+  if (navigator.clipboard) {
+	let recull = parseFloat(document.getElementById("valor5").textContent);
+    navigator.clipboard.writeText(recull).then(() => {
+      alert("Has copiado " + recull);
+    }, (err) => {
+      alert("Algo ha ido mal");
+    });
+  } else if (window.clipboardData) {
+    window.clipboardData.setData(" ", );
+  };
+};
+//Copy 5 eur value to clipboard
+function copy10(){
+  if (navigator.clipboard) {
+	let recull = parseFloat(document.getElementById("valor10").textContent);
+    navigator.clipboard.writeText(recull).then(() => {
+      alert("Has copiado " + recull);
+    }, (err) => {
+      alert("Algo ha ido mal");
+    });
+  } else if (window.clipboardData) {
+    window.clipboardData.setData(" ", );
+  };
+};
+//Copy 10 eur value to clipboard
+
+function copySTR(){
+  if (navigator.clipboard) {
+	let recull = document.getElementById("dir_str").textContent;
+    navigator.clipboard.writeText(recull).then(() => {
+      alert("Has copiado " + recull);
+    }, (err) => {
+      alert("Algo ha ido mal");
+    });
+  } else if (window.clipboardData) {
+    window.clipboardData.setData(" ", );
+  };
+};
+//Copy Wallet address to clipboard
+
+function copyCHAR(){
+  if (navigator.clipboard) {
+	let recull = document.getElementById("dir_char").textContent;
+    navigator.clipboard.writeText(recull).then(() => {
+      alert("Has copiado " + recull);
+    }, (err) => {
+      alert("Algo ha ido mal");
+    });
+  } else if (window.clipboardData) {
+    window.clipboardData.setData(" ", );
+  };
+};
+//Copy .SOL domain to clipboard  
+
+function button_check(num){
+			if(typeof(num) !== "undefined") {
+						if(num !== null) {
+								document.getElementById("but_5").disabled = false;
+								document.getElementById("but_10").disabled = false;
+								}
+							}				
+			};
+//This function check if the variable that holds the value from the js query is not null and if this occurs enable the "copy" buttons  
+
+</script>
+  
+<caption title="Container Table"> </caption>
+<table border="5px" bordercolor="black">
+	<!-- The main table -->  
+<tr> <th align="center">Cantidades</th><th align="center"> Billetera</th>    </tr>
+  
+<tr>
+<td>
+<table>
+<tr> <th align="center" colspan="2"> Precio de Solana (SOL) </th> </tr>
+	<tr>
+		<td style="text-align: center;"><input onclick="loadJSON();" type="button" value="Comprobar precio de Solana (SOL)" />
+		<!-- This button calls the function loadJSON -->	
+  		<h4 id="nota0">Valor en Eur de 1 SOL</h4>
+  		<pre id="sol">-</pre>
+  </td></tr>
+</table>
+  
+</td>
+<td align="center">
+
+<table>
+<tr>
+<td> <img alt="Sorry Image could not be displayed" height="120px" src="https://blogger.googleusercontent.com/img/a/AVvXsEhuqAj6nF5S8HCRKGdTtjWXxAqN7v5mbvgLttsNJ5wLpw9ZKCOf9HwlDMnq_QZqq1_dT7VcRllxiyHsxI36ElmBzkK02HxdF6UUexuu5rq0S7_EPBQuwWEzr-RfHAN3ZFn4U2RNjTFzA7_cPnQV096NlukYsk9tmdfQRkAAgl076GVJf08GTQSRh_Iw=s170" width="120px" /> </td> </tr> </table>
+<!-- This displays the wallet address in a QR code -->  
+  </td>
+  </tr>
+<tr>
+	<td align="center">
+  
+<table>
+<tr align="center"><th colspan="2">Valor en SOL de</th> </tr>
+<tr><th> 5 Eur </th> <th> 10 Eur </th> </tr>
+<tr> 
+<td align="center">
+  <pre id="valor5">-</pre>
+  <input id="but_5" onclick="copy5();" type="button" value="Copiar!" disabled="true" />
+ <!-- This button is disabled by default and calls the function Copy5 -->	
+
+</td>
+<td align="center"> 
+  <pre id="valor10">-</pre>
+  <input id="but_10" onclick="copy10();" type="button" value="Copiar!" disabled="true" />
+  <!-- This button is disabled by default and calls the function Copy10 -->	
+  </td> 
+</tr>  
+  
+</table> 
+  
+</td>
+<td align="center">
+<table border="1">
+
+  <tr>
+    <th>Direccion</th>
+    <td align="center" id="dir_str">Apumi6nSHBjBv2TBQ51RjPTKfXDVm8Am4BebfM5wsNRU</td>
+    <td><input id="dir" onclick="copySTR();" type="button" value="Copiar!" /></td>
+	    <!-- This button calls the function CopySTR -->	
+  </tr>
+  <tr>
+    <th>Dominio Blockchain</th>
+    <td align="center" id="dir_char">elsamics.sol</td>
+    <td><input id="dom" onclick="copyCHAR();" type="button" value="Copiar!" /></td>
+    <!-- This button calls the function CopyCHAR -->	
+  </tr>
+    
+    <tr>
+      <th colspan="3">Porfavor Envia unicamente Solana y SPL Tokens !!! Es tu propia responsabilidad</th>
+    </tr>
+</table> 
+</td>
+</tr>
+</table>    
+</body>
+</html>
