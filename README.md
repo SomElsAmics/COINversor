@@ -10,6 +10,6 @@ https://coinversor.blogspot.com/
 
 Write us for any question or suggestion, we are a non-profit collective always open to help and collaborate.
 
-https://elsamicsdigitals.blogspot.com/p/contacto.html
+https://somelsamics.blogspot.com/p/contacto.html
 
 *We noticed some Android browsers have a problem using this contact form, can write us at elsamicsdigitals@gmail.com
